@@ -57,16 +57,16 @@ def notify(message: dict):
 
 def main():
 
-    username = settings.user
-    password = settings.password
+    # username = settings.user
+    # password = settings.password
+    #
+    # client = mqtt.Client()
 
-    client = mqtt.Client()
-
-    if username and password:
-        client.username_pw_set(username, password)
+    # if username and password:
+    #     client.username_pw_set(username, password)
 
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-   # client.username_pw_set("maker", "mother.mqtt.password")
+    client.username_pw_set(settings.user, settings.password)
     client.will_set(f'{settings.base_topic}/status', json.dumps({"status": "offline"}), retain=True)
 
     client.on_connect = on_connect
